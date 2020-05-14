@@ -11,5 +11,6 @@ locals {
 }
 
 inputs = {
-  all_enabled = true
+  monitoring_enabled = true
+  prep_enabled = true
 }

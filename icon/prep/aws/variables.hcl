@@ -17,7 +17,7 @@ locals {
   ###################
   env_vars = {
     prod = {
-      min_specs = true
+      instance_type = "i3.large"
     }
     dev = {
       min_specs = true
@@ -47,7 +47,7 @@ locals {
   id = join("-", [ for i in local.id_label_order : lookup(local.label_map, i)])
 
   name_label_order = ["stack", "network_name"]
-  name = join("", [ for i in local.name_label_order : title(lookup(local.label_map, i))])
+  name = join("", [ for i in local.name_label_order : lookup(local.label_map, i)])
 
   tags = { for t in local.remote_state_path_label_order : t => lookup(local.label_map, t) }
 }
