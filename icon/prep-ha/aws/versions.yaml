@@ -1,0 +1,8 @@
+prod:
+  registration: master
+  prep-ha: master
+  network: master
+dev:
+  registration: master
+  prep-ha: master
+  network: master

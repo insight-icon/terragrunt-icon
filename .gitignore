@@ -1,0 +1,13 @@
+.idea
+.bak
+
+*.tfstate/
+*.tfstate.backup
+*.tfplan
+
+.terragrunt-cache/
+.terraform/
+
+secrets.yaml
+registration.yaml
+

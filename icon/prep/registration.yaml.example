@@ -1,0 +1,28 @@
+#
+# These items must be filled out all
+#
+organization_name: "Insight-Super-Test"  # This needs to be unique.  Don't register a team with the same name
+organization_email: "youremail@gmail.com" # Must be valid email.  Is public so will want to use non-personal account
+organization_city: "San Francisco" # No restrictions
+organization_website: "https://insight-icon.net" # Has to begin with http
+organization_country: "USA" # Three letter country code - Make sure this exists here https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3
+
+#
+# The rest of this is optional but good for promotional reasons as they populate items for your team in the tracker
+# Checkout https://tracker.icon.foundation/governance to see where the logos are shown and social media accounts
+#
+# All the logos are complete paths to the image on your local drive
+# Example -> logo_256: "/Users/rob/icon/logos/logo_s56.png"
+logo_256: "/Users/rob/icon/logos/logo_256.png"
+logo_1024: "/Users/rob/icon/logos/logo_1024.png"
+logo_svg: "/Users/rob/icon/logos/logo.svg"
+
+# All of this is optional.  These are links to social media accounts that will be populated next to your team name
+steamit: ""
+twitter: ""
+youtube: ""
+facebook: ""
+github: ""
+reddit: ""
+keybase: ""
+telegram: ""

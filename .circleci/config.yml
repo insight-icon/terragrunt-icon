@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  test:
+    docker:
+      - image: insightinfrastructure/terragrunt-aws-ci:v0.5.2
+    steps:
+      - checkout
+      - run:
+          name: Apply module
+          command: |
+            ./.circleci/test-trigger.sh
+
+workflows:
+  version: 2
+  default:
+    jobs:
+      - test:
+          context: all-provider-ci-1
