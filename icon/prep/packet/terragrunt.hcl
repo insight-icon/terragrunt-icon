@@ -16,7 +16,7 @@ remote_state {
     path = "backend.tf"
     if_exists = "overwrite_terragrunt"
   }
-}
+
 
 inputs = merge(
 local.vars.locals,
