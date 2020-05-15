@@ -2,7 +2,13 @@
 
 Reference architecture for deploying various node configurations for the ICON Blockchain. 
 
+> Supersedes [github.com/insight-icon/terragrunt-icon-monitor](https://github.com/insight-icon/terragrunt-icon-monitor)
+
 **WIP - Too early to use unless you know what you are doing**
+
+### Planned layout 
+
+> Missing some providers / tests but this is roughly what it will look like. 
 
 ```bash
 ├── citizen
