@@ -8,6 +8,7 @@ for s in $STACKS ; do
   for p in $PROVIDERS ; do
     PROVIDER_COMMIT=$(git log -1 --format=format:%H --full-diff icon/"$s"/"$p")
     if [ "$PROVIDER_COMMIT" = "$LATEST_COMMIT" ]; then
+      echo "Found diff in $s stack and $p provider"
       (cd icon/"$s"/"$p" && make test)
     fi
   done
