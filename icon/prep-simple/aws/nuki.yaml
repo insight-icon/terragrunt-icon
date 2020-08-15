@@ -1,0 +1,34 @@
+---
+
+version_:
+  type: yaml
+  path: versions.yaml
+
+region:
+  type: stat
+  input: "{{ nuki.aws_region }}"
+
+node:
+  type: nukikata
+  merge: true
+  template: https://github.com/insight-icon/terraform-icon-aws-prep
+  checkout: "{{ nuki.version_[nuki.environment] }}"
+  existing_context: "{{ nuki }}"
+
+# Write Deployment
+write_:
+  type: nukikata
+  context_file: "{{ nuki.scripts_dir_ }}/write.yaml"
+  existing_context: "{{ nuki }}"
+
+# Apply
+apply_confirm_:
+  type: confirm
+  message: Do you want deploy now?
+
+apply_:
+  type: nukikata
+  context_file: "{{ nuki.scripts_dir_ }}/apply.yaml"
+  when: "{{ nuki.apply_confirm_ }}"
+  existing_context: "{{ nuki }}"
+

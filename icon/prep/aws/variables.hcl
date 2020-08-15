@@ -6,10 +6,10 @@ locals {
   stack = "prep"
   provider = "aws"
   network_name = "testnet"
-  environment = "dev"
+  environment = "prod"
   region = "us-east-1"
 
-  registration_enabled = true
+  registration_enabled = false
   registration_file = "registration.yaml"
 
   ###################

@@ -26,6 +26,7 @@ dependency "registration" {
 }
 
 inputs = {
+
   public_ip = local.vars.registration_enabled ? dependency.registration.outputs.public_ip : local.vars.secrets.public_ip
   subnet_id = dependency.network.outputs.public_subnets[0]
   vpc_security_group_ids = [dependency.network.outputs.prep_security_group_id]

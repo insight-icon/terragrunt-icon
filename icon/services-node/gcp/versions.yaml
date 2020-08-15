@@ -1,6 +1,0 @@
-prod:
-  node: master
-  network: master
-dev:
-  node: master
-  network: master
