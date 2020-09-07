@@ -9,15 +9,24 @@ settings_:
 # Action
 action_:
   type: checkbox
-  message: What we trying to do now?
+  message: What do you want to do?
   choices:
-    - install: Install dependencies
-    - profiles: Set SSH and wallet profiles
-    - list: List deployments
-    - create: Create new deployment
-    - modify: Modify deployment
-    - apply: Apply deployment
-    - destroy: Destroy deployment
+    - setup: Setup a node
+    - maintenance: Do maintenance on a node
+
+#action_:
+#  type: checkbox
+#  message: What do you want to do?
+#  choices:
+#    - install: Install dependencies
+#    - profiles: Set SSH and wallet registration profiles
+#    - register: Register a node
+#    - update: Update details about a node
+#    - list: List deployments
+#    - create: Create new deployment
+#    - modify: Modify deployment
+#    - apply: Apply deployment
+#    - destroy: Destroy deployment
 
 # Install Dependencies
 installs_:

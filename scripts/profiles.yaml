@@ -15,7 +15,7 @@ choice_:
   choices:
     - docs: Open docs to explain this
     - ssh: SSH keys
-#    - wallet: Wallets
+    - wallet: Wallets
 #    - dns: DNS settings
 #    - cloud: Cloud credentials
 
@@ -39,7 +39,6 @@ ssh_options_:
     - ssh-path: Set path to SSH keys
 
 ## SSH Path
-
 ssh_public_key_path_:
   type: input
   message: What path is your public ssh key?
@@ -98,3 +97,84 @@ ssh_keygen_add_:
       public_key_path: "{{ profiles.ssh_keygen_path_ }}.pub"
       private_key_path: "{{ profiles.ssh_keygen_path_ }}"
   append_keys: ssh_profiles
+
+
+# Wallets
+wallet_network_choice_:
+  type: select
+  message: Which network are you registering a node on?
+  choices: "{{ profiles._network_files }}"
+
+#network_data_:
+#  type: requests
+#  method: GET
+#  url: "https://raw.githubusercontent.com/JINWOO-J/icon_network_info/master/conf/{{ profiles.wallet_network_choice_ }}.json"
+
+network_data_:
+  type: json
+  path: scripts/all.json
+
+wallet_profile_name_:
+  type: input
+  message: What do you want to call your wallet?
+
+wallet_action_:
+  type: select
+  message: NOT IMPLEMENTED - Do you want to create a new wallet and fill with test tokens?
+  when: "{{ profiles.wallet_network_choice_ != 'mainnet' }}"
+  choices:
+    - link: Link to existing
+    - create: Create a new wallet
+    - fill: Fill a wallet with test tokens
+
+wallet_link_:
+  type: input
+  message: Path to the wallet >
+  when: "{{ profiles.wallet_action_ == 'link' }}"
+
+wallet_create_path_:
+  type: input
+  message: What path do you want to put the keystore?
+  default: "{{ cwd }}/{{ profiles.wallet_profile_name_ }}"
+  when: "{{ profiles.wallet_action_ == 'create' }}"
+
+wallet_create_:
+  type: command
+  command: "preptools keystore --path {{ profiles.wallet_create_path_ }}"
+  when: "{{ profiles.wallet_action_ == 'create' }}"
+
+wallet_fill_path_:
+  type: input
+  message: Enter the path to the wallet you want to fill?
+  default: "{{ cwd }}/{{ profiles.wallet_profile_name_ }}"
+  when:
+    - "{{ profiles.wallet_action_ == 'fill' }}"
+    - "{{ profiles.wallet_action_ not in ['create', 'link'] }}"
+  else: "{{ profiles.wallet_create_path_ }}"
+
+wallet_fill_:
+  type: command
+  when: "{{ profiles.wallet_action_ == 'link' }}"
+
+wallet_dualizing_:
+  type: confirm
+  message: Do you want to dualize your wallet keys?
+  when: "{{ profiles.wallet_network_choice_ != 'mainnet' }}" # Force key dualization on main
+
+wallet_password_:
+  type: password
+  message: What password to set for the wallet? - Only testnets - not mainnet >
+  when: "{{ profiles.wallet_network_choice_ != 'mainnet' }}"
+
+wallet_add_:
+  type: yaml
+  when:
+    - "{{ 'wallet' in profiles.choice_ }}"
+  path: "{{ profiles.secrets_file_ }}"
+  in_place: true
+  append_items:
+    - name: "{{ profiles.wallet_profile_name_ }}"
+      keystore_path: "{{ profiles. }}"
+      node_keystore_path: "{{ }}"
+  append_keys: wallet_profiles
+

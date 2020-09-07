@@ -8,8 +8,7 @@
 .terragrunt-cache/
 .terraform/
 
-secrets.yaml
-registration.yaml
+secrets.yml
 
 deployments/*
 modules/*

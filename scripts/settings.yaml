@@ -7,6 +7,18 @@ _environments:
   - stage
   - prod
 
+_network_choices:
+  - mainnet: Mainnet
+  - pagoda: Pagoda - TestNet for PReps
+  - euljiro: Euljiro - Testnet for Exchanges
+  - yeouido: Yeouido - Testnet for DApps
+
+_network_files:
+  - mainnet: Mainnet
+  - zicon: Pagoda - TestNet for PReps
+  - testnet: Euljiro - Testnet for Exchanges
+  - bicon: Yeouido - Testnet for DApps
+
 deployments_list_:
   type: listdir
   path: deployments

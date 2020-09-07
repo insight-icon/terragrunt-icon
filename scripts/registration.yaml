@@ -1,0 +1,41 @@
+---
+
+organization_name:
+  type: input
+  message: What is the name of your organization?
+
+organization_email:
+  type: input
+  message: What email do you want to register with?
+
+organization_city:
+  type: input
+  message: What is city are you in?
+
+organization_website:
+  type: input
+  message: What is your website?
+
+organization_country:
+  type: input
+  message: |
+    What is your three letter Alpha-3 coutry code?
+
+    This must match exactly per this list https://www.iban.com/country-codes
+
+    >
+
+logo_256: ""
+logo_1024: ""
+logo_svg: ""
+
+steamit: ""
+twitter: ""
+youtube: ""
+facebook: ""
+
+github: ""
+
+reddit: ""
+keybase: ""
+telegram: ""

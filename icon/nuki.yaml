@@ -12,15 +12,11 @@ namespace:
   message: What do you want to call your namespace?
   default: polkadot
 
-# Network Name
-network_name:
-  type: select
-  message: What network do you want to run on?
-  choices:
-    - mainnet: Mainnet
-    - pagoda: Pagoda - TestNet for PReps
-    - euljiro: Euljiro - Testnet for Exchanges
-    - yeouido: Yeouido - Testnet for DApps
+## Network Name
+#network_name:
+#  type: select
+#  message: What network do you want to run on?
+#  choices: "{{ nuki._network_choices }}"
 
 # Environment
 environment:
@@ -36,7 +32,7 @@ environment:
 deployment_id:
   type: input
   message: What deployment id do you want to make?
-  default: 1
+  default: "1"
 
 # Call the stack
 stack_call_:
