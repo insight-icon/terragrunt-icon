@@ -1,5 +1,5 @@
 terraform {
-  source = "github.com/insight-harmony/terraform-harmony-aws-node.git?ref=${local.versions}"
+  source = "github.com/insight-harmony/terraform-icon-aws-node.git?ref=${local.versions}"
 }
 
 locals {

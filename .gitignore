@@ -9,6 +9,7 @@
 .terraform/
 
 secrets.yml
+run.yml
 
 deployments/*
 modules/*
