@@ -1,5 +1,5 @@
 terraform {
-  source = "github.com/insight-icon/terraform-icon-aws-registration.git?ref=${local.vars.versions.registration}"
+  source = "."
 }
 
 include {
