@@ -1,5 +1,5 @@
 terraform {
-  source = "github.com/insight-harmony/terraform-harmony-aws-node.git?ref=${local.versions}"
+  source = "github.com/insight-icon/terraform-icon-aws-registration.git?ref=master"
 }
 
 locals {
@@ -7,32 +7,24 @@ locals {
   run = yamldecode(file(find_in_parent_folders("run.yml"))) # input
   settings = yamldecode(file(find_in_parent_folders("settings.yml")))
   secrets = yamldecode(file(find_in_parent_folders("secrets.yml")))
-  versions = yamldecode(file("versions.yaml"))[local.run.environment]
 
   # Inputs
-  deployment_id = join(".", [ for i in local.settings.deployment_id_label_order : lookup(local.run, i)])
-  deployment_vars = yamldecode(file("${find_in_parent_folders("deployments")}/${local.deployment_id}.yaml"))
-  ssh_profile = local.secrets.ssh_profiles[index(local.secrets.ssh_profiles.*.name, local.deployment_vars.ssh_profile_name)]
-  wallet_profile = local.secrets.wallet_profiles[index(local.secrets.wallet_profiles.*.name, local.deployment_vars.wallet_profile_name)]
+  registration_id = join(".", [ for i in local.settings.registration_id_label_order : lookup(local.run, i)])
+  registration_vars = yamldecode(file("${find_in_parent_folders("registrations")}/${local.registration_id}.yaml"))
+
+  wallet_profile = local.secrets.wallet_profiles[index(local.secrets.wallet_profiles.*.name, local.registration_id)]
 
   # Common labels
-  id = join("-", [ for i in local.settings.id_label_order : lookup(local.run, i)])
-  short_id = join("-", [ for i in local.settings.short_id_label_order : lookup(local.run, i)])
-  name = join("", [ for i in local.settings.name_label_order : title(lookup(local.run, i))])
-  tags = { for t in local.settings.remote_state_path_label_order : t => lookup(local.run, t) }
+  tags = { for t in local.settings.registration_remote_state_path_label_order : t => lookup(local.run, t) }
 
   # Remote State
-  remote_state_path = join("/", [ for i in local.settings.remote_state_path_label_order : lookup(local.run, i)])
+  remote_state_path = join("/", [ for i in local.settings.registration_remote_state_path_label_order : lookup(local.run, i)])
 }
 
-
-inputs = merge({
-  vpc_name = local.id
-},
+inputs = merge(
 local,
 local.run,
-local.deployment_vars,
-local.ssh_profile,
+local.registration_vars,
 local.wallet_profile,
 )
 
@@ -46,10 +38,6 @@ provider "aws" {
   skip_metadata_api_check    = true
   skip_region_validation     = true
   skip_requesting_account_id = true
-}
-
-provider "cloudflare" {
-  version = "~> 2.0"
 }
 EOF
 }

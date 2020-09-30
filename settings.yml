@@ -2,10 +2,15 @@ deployment_id_label_order:
   - namespace
   - network_name
   - provider
-  - environment
   - region
   - stack
   - deployment_id
+
+registration_id_label_order:
+  - namespace
+  - network_name
+  - provider
+  - region
 
 remote_state_path_label_order:
   - namespace
@@ -15,6 +20,12 @@ remote_state_path_label_order:
   - environment
   - region
   - deployment_id
+
+registration_remote_state_path_label_order:
+  - namespace
+  - network_name
+  - provider
+  - region
 
 dns_order:
   - region

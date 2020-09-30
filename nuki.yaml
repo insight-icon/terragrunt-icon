@@ -11,22 +11,15 @@ action_:
   type: checkbox
   message: What do you want to do?
   choices:
-    - setup: Setup a node
-    - maintenance: Do maintenance on a node
-
-#action_:
-#  type: checkbox
-#  message: What do you want to do?
-#  choices:
-#    - install: Install dependencies
-#    - profiles: Set SSH and wallet registration profiles
-#    - register: Register a node
-#    - update: Update details about a node
-#    - list: List deployments
-#    - create: Create new deployment
-#    - modify: Modify deployment
-#    - apply: Apply deployment
-#    - destroy: Destroy deployment
+    - install: Install dependencies
+    - register: Register a node
+#    - profiles: Set SSH profiles
+    - update_reg: Update registration details
+    - list: List deployments
+    - create: Create new deployment
+    - modify: Modify deployment
+    - apply: Apply deployment
+    - destroy: Destroy deployment
 
 # Install Dependencies
 installs_:
@@ -35,12 +28,26 @@ installs_:
   existing_context: "{{ nuki }}"
   when: "{{ 'install' in nuki.action_ }}"
 
-# Profiles
-profiles_:
+## Profiles
+#profiles_:
+#  type: nukikata
+#  context_file: scripts/profiles.yaml
+#  existing_context: "{{ nuki }}"
+#  when: "{{ 'profiles' in nuki.action_ }}"
+
+# Register
+register_:
   type: nukikata
-  context_file: scripts/profiles.yaml
+  chdir: "icon/prep-registration"
+  when: "{{ 'register' in nuki.action_ }}"
   existing_context: "{{ nuki }}"
-  when: "{{ 'profiles' in nuki.action_ }}"
+
+registration_update_:
+  type: nukikata
+  context_file: scripts/registration_update.yaml
+  when: "{{ 'update_reg' in nuki.action_ }}"
+  existing_context: "{{ nuki }}"
+
 
 # List Deployments
 list_:
@@ -60,7 +67,7 @@ list_:
 # Create Deployment
 create_:
   type: nukikata
-  chdir: polkadot
+  chdir: icon
   when: "{{ 'create' in nuki.action_ }}"
   existing_context: "{{ nuki }}"
 

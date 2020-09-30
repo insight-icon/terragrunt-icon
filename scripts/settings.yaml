@@ -15,9 +15,9 @@ _network_choices:
 
 _network_files:
   - mainnet: Mainnet
-  - zicon: Pagoda - TestNet for PReps
-  - testnet: Euljiro - Testnet for Exchanges
-  - bicon: Yeouido - Testnet for DApps
+  - zicon: Zicon / Pagoda - TestNet for PReps
+  - bicon: Bicon / Euljiro - Testnet for Exchanges
+  - testnet: Testnet / Yeouido - Testnet for DApps
 
 deployments_list_:
   type: listdir
@@ -27,6 +27,15 @@ deployments_list_:
 deployments_dir_:
   type: find_in_parent
   target: deployments
+
+registrations_list_:
+  type: listdir
+  path: registrations
+  ignore_hidden_files: true
+
+registration_dir_:
+  type: find_in_parent
+  target: registrations
 
 scripts_dir_:
   type: find_in_parent

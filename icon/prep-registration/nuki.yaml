@@ -1,0 +1,30 @@
+stack:
+  type: stat
+  input: registration
+
+# Namespace
+namespace:
+  type: input
+  message: What do you want to call your namespace?
+  default: icon
+
+# Network Name
+network_name:
+  type: select
+  message: What network do you want to register on?
+  choices: "{{ nuki._network_choices }}"
+
+# Provider
+provider:
+  type: select
+  message: What provider are you registering on?
+  choices:
+    - aws
+    - gcp
+    - packet
+
+# Call the stack
+provider_call_:
+  type: nukikata
+  chdir: "{{ nuki.provider }}"
+  existing_context: "{{ nuki }}"

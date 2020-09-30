@@ -1,0 +1,41 @@
+
+update_warning_:
+  type: print
+  statement: Be sure to edit the relevent file
+
+update_choice_:
+  type: select
+  message: Which registration do you want to update?
+  choices: "{{ registration_update.registrations_list_ }}"
+
+update_run_split_:
+  type: split
+  input: "{{ registration_update.update_choice_ }}"
+
+create_run_file_:
+  type: yaml
+  path: "{{ registration_update.run_file_ }}"
+  contents:
+    namespace: "{{ registration_update.update_run_split_[0] }}"
+    network_name: "{{ registration_update.update_run_split_[1] }}"
+    provider: "{{ registration_update.update_run_split_[2] }}"
+    region: "{{ registration_update.update_run_split_[3] }}"
+  
+apply_:
+  type: shell
+  chdir: "icon/prep-registration/{{ registration_update.update_run_split_[2] }}"
+  command: terragrunt apply --auto-approve --terragrunt-source-update
+
+  
+#reg_details_:
+#  type: yaml
+#  path: "{{ registration_update.run_file_ }}"
+#  contents:
+
+#    "{{ registration_update.item }}": "{{ registration_update.update_run_split_[registration_update.index] }}"
+
+#create_run_file_:
+#  type: yaml
+#  path: "{{ registration_update.run_file_ }}"
+#  contents: "{{ registration_update }}"
+#  filter: "{{ registration_update.settings_.registration_id_label_order }}"

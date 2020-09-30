@@ -1,0 +1,14 @@
+
+#scripts_dir_: .
+#
+#register_prompt_:
+#  type: nukikata
+#  context_file: "{{ nuki.scripts_dir_ }}/registration.yaml"
+
+pass:
+  type: password
+  message: enter
+  
+print_:
+  type: pprint
+  statement: "{{ nuki }}"

@@ -1,0 +1,42 @@
+---
+# Write the deployment file to the `deployments` directory
+
+write_intro_:
+  type: print
+  statement: Writing registratration
+
+reg_file_:
+  type: stat
+  input: "{{ registration_write.registration_dir_ }}/{{ registration_write.registration_name_ }}.yaml"
+
+reg_exists_:
+  type: path_exists
+  path: "{{ registration_write.reg_file_ }}"
+
+reg_overwrite_confirm_:
+  type: confirm
+  message: |
+    Do you want to overwrite the existing icon.api.{{registration_write.network_name}}.{{registration_write.environment}}.{{registration_write.region}}
+    registration? - will exit program ->
+  when: "{{ registration_write.reg_exists_ }}"
+
+reg_write_:
+  type: yaml
+  path: "{{ registration_write.reg_file_ }}"
+  contents: "{{ registration_write.register_prompt_ }}"
+  remove:
+    - ^_
+    - _$
+  when:
+    - "{{ not registration_write.reg_exists_ }}"
+
+reg_overwrite_:
+  type: yaml
+  path: "{{ registration_write.reg_file_ }}"
+  contents: "{{ registration_write.register_prompt_ }}"
+  remove:
+    - ^_
+    - _$
+  when:
+    - "{{ registration_write.reg_overwrite_confirm_ is defined }}"
+    - "{{ registration_write.reg_overwrite_confirm_ }}"
