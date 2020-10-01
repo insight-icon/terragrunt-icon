@@ -12,6 +12,7 @@ secrets.yml
 run.yml
 
 deployments/*
+registrations/*
 modules/*
 !/**/.gitkeep
 

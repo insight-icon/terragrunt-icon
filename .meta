@@ -1,13 +1,13 @@
 {
   "projects": {
-    "modules/aws/terraform-aws-icon-lambda-whitelist-cron": "https://github.com/insight-icon/terraform-aws-icon-lambda-whitelist-cron",
-    "modules/aws/terraform-icon-packet-registration": "https://github.com/insight-icon/terraform-icon-packet-registration",
-    "modules/aws/terraform-icon-aws-prep": "https://github.com/insight-icon/terraform-icon-aws-prep",
-
-    "modules/gcp/terraform-aws-icon-lambda-whitelist-cron": "https://github.com/insight-icon/terraform-icon-gcp-network",
-    "modules/ansible/ansible-role-icon-prep": "https://github.com/insight-icon/ansible-role-icon-prep",
-
-    "modules/ansible/ansible-role-icon-daedric": "https://github.com/insight-icon/ansible-role-icon-daedric"
-
+    "modules/aws/lambda-whitelist-cron": "https://github.com/insight-icon/terraform-aws-icon-lambda-whitelist-cron",
+    "modules/aws/registration": "https://github.com/insight-icon/terraform-icon-aws-registration",
+    "modules/aws/prep": "https://github.com/insight-icon/terraform-icon-aws-prep",
+    "modules/gcp/network": "https://github.com/insight-icon/terraform-icon-gcp-network",
+    "modules/packet/registration": "https://github.com/insight-icon/terraform-icon-packet-registration",
+    "modules/ansible/prep": "https://github.com/insight-icon/ansible-role-icon-prep",
+    "modules/ansible/daedric": "https://github.com/insight-icon/ansible-role-icon-daedric",
+    "modules/preptools": "https://github.com/icon-project/preptools",
+    "modules/register-base": "https://github.com/insight-icon/terraform-icon-registration"
   }
 }
