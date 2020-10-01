@@ -1,8 +1,0 @@
-prod:
-  registration: master
-  node: master
-  network: master
-dev:
-  registration: master
-  node: master
-  network: master
