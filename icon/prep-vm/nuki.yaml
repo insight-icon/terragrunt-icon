@@ -1,0 +1,52 @@
+---
+
+read_registrations_:
+  type: listdir
+  path: "{{ nuki.registration_dir_ }}"
+  ignore_hidden_files: true
+
+reg_choice_:
+  type: select
+  message: Which registration would you like to deploy?
+  choices: "{{ nuki.read_registrations_ }}"
+
+reg_choice_list_:
+  type: split
+  input: "{{ nuki.reg_choice_ }}"
+
+namespace:
+  type: stat
+  input: "{{ nuki.reg_choice_list_[0] }}"
+
+network_name:
+  type: stat
+  input: "{{ nuki.reg_choice_list_[1] }}"
+  
+provider:
+  type: stat
+  input: "{{ nuki.reg_choice_list_[2] }}"
+  
+region:
+  type: stat
+  input: "{{ nuki.reg_choice_list_[3] }}"
+  
+deployment_id:
+  type: input
+  message: What deployment ID?
+  default: 1
+
+private_key_path:
+  type: input
+  message: What is the absolute path to your private ssh key?
+  default: "~/.ssh/id_rsa"
+
+public_key_path:
+  type: input
+  message: What path is your public ssh key?
+  default: "{{ nuki.private_key_path }}.pub"
+
+# Call the stack
+provider_call_:
+  type: nukikata
+  chdir: "{{ nuki.provider }}"
+  existing_context: "{{ nuki }}"

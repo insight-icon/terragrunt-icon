@@ -17,7 +17,6 @@ remote_state_path_label_order:
   - stack
   - provider
   - network_name
-  - environment
   - region
   - deployment_id
 
@@ -37,14 +36,11 @@ id_label_order:
   - namespace
   - stack
   - network_name
-  - environment
 
 short_id_label_order:
   - stack
-  - environment
 
 name_label_order:
   - namespace
   - stack
   - network_name
-  - environment

@@ -1,18 +1,10 @@
 ---
 
-version_:
-  type: yaml
-  path: versions.yaml
-
-region:
-  type: stat
-  input: "{{ nuki.aws_region }}"
-
 node:
   type: nukikata
   merge: true
   template: https://github.com/insight-icon/terraform-icon-aws-prep
-  checkout: "{{ nuki.version_[nuki.environment] }}"
+#  checkout: master # change in tg.hcl
   existing_context: "{{ nuki }}"
 
 # Write Deployment
@@ -26,9 +18,18 @@ apply_confirm_:
   type: confirm
   message: Do you want deploy now?
 
-apply_:
-  type: nukikata
-  context_file: "{{ nuki.scripts_dir_ }}/apply.yaml"
+create_run_file_:
+  type: yaml
+  path: "{{ apply.run_file_ }}"
+  contents: "{{ apply }}"
   when: "{{ nuki.apply_confirm_ }}"
-  existing_context: "{{ nuki }}"
+  filter: "{{ apply.settings_.deployment_id_label_order }}"
 
+apply_:
+  type: shell
+  loop:
+    - data
+    - node
+  chdir: "{{ nuki.item }}"
+  command: terragrunt apply --terragrunt-source-update --auto-approve
+  when: "{{ nuki.apply_confirm_ }}"

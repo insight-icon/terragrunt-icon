@@ -18,11 +18,12 @@ registration_name_:
   type: join
   input: "{{ nuki.reg_keys_ }}"
 
-# Profiles
-keystore_:
-  type: nukikata
-  context_file: "{{ nuki.scripts_dir_ }}/keystore.yaml"
-  existing_context: "{{ nuki }}"
+
+## Profiles
+#keystore_:
+#  type: nukikata
+#  context_file: "{{ nuki.scripts_dir_ }}/keystore.yaml"
+#  existing_context: "{{ nuki }}"
 
 ## Action
 #register_action_:
@@ -38,7 +39,8 @@ register_prompt_:
   context_file: "{{ nuki.scripts_dir_ }}/registration.yaml"
 #  existing_context:
 #    registration_name_: "{{ nuki.registration_name_ }}"
-  
+
+
 register_prompt_write_:
   type: nukikata
   context_file: "{{ nuki.scripts_dir_ }}/registration_write.yaml"
@@ -58,3 +60,6 @@ create_run_file_:
 apply_:
   type: shell
   command: terragrunt apply --terragrunt-non-interactive
+
+
+

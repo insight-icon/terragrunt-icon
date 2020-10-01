@@ -7,13 +7,13 @@ _environments:
   - stage
   - prod
 
-_network_choices:
-  - mainnet: Mainnet
-  - pagoda: Pagoda - TestNet for PReps
-  - euljiro: Euljiro - Testnet for Exchanges
-  - yeouido: Yeouido - Testnet for DApps
+#_network_choices:
+#  - mainnet: Mainnet
+#  - pagoda: Pagoda - TestNet for PReps
+#  - euljiro: Euljiro - Testnet for Exchanges
+#  - yeouido: Yeouido - Testnet for DApps
 
-_network_files:
+_network_choices:
   - mainnet: Mainnet
   - zicon: Zicon / Pagoda - TestNet for PReps
   - bicon: Bicon / Euljiro - Testnet for Exchanges

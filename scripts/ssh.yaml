@@ -15,7 +15,7 @@ ssh_public_key_path_:
   type: input
   message: What path is your public ssh key?
   when: "{{ ssh.ssh_options_ == 'ssh-path' }}"
-  default: "$HOME/.ssh/"
+  default: "~/.ssh/"
 
 ssh_private_key_path_:
   type: input
@@ -47,15 +47,18 @@ ssh_keygen_:
   command: |
     ssh-keygen -t rsa -b 4096 -f {{ ssh.ssh_keygen_path_ }}
 
-ssh_keygen_add_:
-  type: yaml
-  when: "{{ ssh.ssh_options_ == 'ssh-path' }}"
-  path: "{{ ssh.secrets_file_ }}"
-  in_place: true
-  append_items:
-    - name: "{{ ssh.ssh_profile_name_ }}"
-      public_key_path: "{{ ssh.ssh_keygen_path_ }}.pub"
-      private_key_path: "{{ ssh.ssh_keygen_path_ }}"
-  append_keys: ssh_profiles
+
+
+
+#ssh_keygen_add_:
+#  type: yaml
+#  when: "{{ ssh.ssh_options_ == 'ssh-path' }}"
+#  path: "{{ ssh.secrets_file_ }}"
+#  in_place: true
+#  append_items:
+#    - name: "{{ ssh.ssh_profile_name_ }}"
+#      public_key_path: "{{ ssh.ssh_keygen_path_ }}.pub"
+#      private_key_path: "{{ ssh.ssh_keygen_path_ }}"
+#  append_keys: ssh_profiles
 
 

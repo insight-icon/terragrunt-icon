@@ -1,5 +1,42 @@
 ---
 
+# Public IP
+existing_public_ip_:
+  type: confirm
+  message: Do you have an existing public IP?
+  default: false
+
+public_ip:
+  type: input
+  message: public IPv4 >>
+  when: "{{ registration.existing_public_ip_ }}"
+
+# Keystore
+keystore_path:
+  type: input
+  message: Absolute path to keystore >>
+
+keystore_password:
+  type: password
+  message: Password to wallet?
+
+# Operator keystore
+operator_keystore_exist_:
+  type: confirm
+  message: Do you have an exsiting operator keystore?
+  default: false
+
+operator_keystore_path:
+  type: input
+  message: Absolute path to keystore >>
+  when: "{{ registration.operator_keystore_exist_ }}"
+
+operator_keystore_password:
+  type: password
+  message: Password to wallet?
+  when: "{{ registration.operator_keystore_exist_ }}"
+
+# Details
 organization_name:
   type: input
   message: What is the name of your organization?

@@ -9,6 +9,35 @@ pass:
   type: password
   message: enter
   
+this:
+  merge: true
+  type: block
+  items:
+    that:
+      type: input
+      message: Path to the wallet >
+
+#reg_choice_: icon3.zicon.aws.eu-north-1.yaml
+##  type: select
+##  message: Which registration would you like to deploy?
+##  choices: "{{ nuki.read_registrations_ }}"
+#
+#reg_choice_list_:
+#  type: split
+#  input: "{{ nuki.reg_choice_ }}"
+#
+#settings_:
+#  type: yaml
+#  path: ../settings.yml
+#
+## Loops through
+#vars:
+#  type: stat
+#  loop: "{{ nuki.settings_['registration_id_label_order'] }}"
+##  merge: true
+#  update:
+#    "{{ nuki.item }}": "{{ nuki.reg_choice_list_[nuki.index] }}"
+#
 print_:
   type: pprint
   statement: "{{ nuki }}"

@@ -1,23 +1,27 @@
 terraform {
-  source = "github.com/insight-harmony/terraform-icon-aws-node.git?ref=${local.versions}"
+// Change in nuki.yaml as well
+  source = "github.com/insight-icon/terraform-icon-aws-registration.git?ref=master"
 }
+
+dependency "data" {
+  config_path = "data"
+}
+
 
 locals {
   # Read the nearest files
   run = yamldecode(file(find_in_parent_folders("run.yml"))) # input
   settings = yamldecode(file(find_in_parent_folders("settings.yml")))
-  secrets = yamldecode(file(find_in_parent_folders("secrets.yml")))
-  versions = yamldecode(file("versions.yaml"))[local.run.environment]
+//  secrets = yamldecode(file(find_in_parent_folders("secrets.yml")))
 
   # Inputs
   deployment_id = join(".", [ for i in local.settings.deployment_id_label_order : lookup(local.run, i)])
   deployment_vars = yamldecode(file("${find_in_parent_folders("deployments")}/${local.deployment_id}.yaml"))
-  ssh_profile = local.secrets.ssh_profiles[index(local.secrets.ssh_profiles.*.name, local.deployment_vars.ssh_profile_name)]
-  wallet_profile = local.secrets.wallet_profiles[index(local.secrets.wallet_profiles.*.name, local.deployment_vars.wallet_profile_name)]
+  registration_id = join(".", [ for i in local.settings.registration_id_label_order : lookup(local.run, i)])
+  registration_vars = yamldecode(file("${find_in_parent_folders("registrations")}/${local.registration_id}.yaml"))
 
   # Common labels
   id = join("-", [ for i in local.settings.id_label_order : lookup(local.run, i)])
-  short_id = join("-", [ for i in local.settings.short_id_label_order : lookup(local.run, i)])
   name = join("", [ for i in local.settings.name_label_order : title(lookup(local.run, i))])
   tags = { for t in local.settings.remote_state_path_label_order : t => lookup(local.run, t) }
 
@@ -27,7 +31,7 @@ locals {
 
 
 inputs = merge({
-  vpc_name = local.id
+  public_ip = dependency.outputs.data.public_ip
 },
 local,
 local.run,
@@ -46,10 +50,6 @@ provider "aws" {
   skip_metadata_api_check    = true
   skip_region_validation     = true
   skip_requesting_account_id = true
-}
-
-provider "cloudflare" {
-  version = "~> 2.0"
 }
 EOF
 }
