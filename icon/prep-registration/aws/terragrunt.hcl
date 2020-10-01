@@ -6,13 +6,10 @@ locals {
   # Read the nearest files
   run = yamldecode(file(find_in_parent_folders("run.yml"))) # input
   settings = yamldecode(file(find_in_parent_folders("settings.yml")))
-  secrets = yamldecode(file(find_in_parent_folders("secrets.yml")))
 
   # Inputs
   registration_id = join(".", [ for i in local.settings.registration_id_label_order : lookup(local.run, i)])
   registration_vars = yamldecode(file("${find_in_parent_folders("registrations")}/${local.registration_id}.yaml"))
-
-  wallet_profile = local.secrets.wallet_profiles[index(local.secrets.wallet_profiles.*.name, local.registration_id)]
 
   # Common labels
   tags = { for t in local.settings.registration_remote_state_path_label_order : t => lookup(local.run, t) }
@@ -25,7 +22,7 @@ inputs = merge(
 local,
 local.run,
 local.registration_vars,
-local.wallet_profile,
+//local.wallet_profile,
 )
 
 generate "provider" {
